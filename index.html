@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cat Clicker</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <h1>Cat Clicker</h1>
+        <div class="stats">
+          <p>Cat Treats: <span id="treats-display">0</span></p>
+          <p>(<span id="tps-display">0</span> per second)</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Game Area -->
+    <main>
+      <div class="game-container">
+        <!-- Left Sidebar: Recruit Cats -->
+        <section class="sidebar" id="cats-menu">
+          <h2>Recruit Cats</h2>
+          <ul>
+            <li>
+              <button class="recruit-btn" id="buy-street-cat">
+                Street Cat - 10 Treats
+              </button>
+            </li>
+            <li>
+              <button class="recruit-btn" id="buy-grandma-cat">
+                Grandma Cat - 100 Treats
+              </button>
+            </li>
+            <li>
+              <button class="recruit-btn" id="buy-fisher-cat">
+                Fisher Cat - 1000 Treats
+              </button>
+            </li>
+            <li>
+              <button class="recruit-btn" id="buy-hunter-cat">
+                Hunter Cat - 5000 Treats
+              </button>
+            </li>
+            <li>
+              <button class="recruit-btn" id="buy-neko-chef">
+                Neko Chef - 10000 Treats
+              </button>
+            </li>
+            <!-- Add more cat types here -->
+          </ul>
+        </section>
+
+        <!-- Center: Clickable Cat -->
+        <section class="center-area">
+          <button id="cat-btn">
+            <img src="./assets/cat.webp" alt="Clickable Cat" id="cat-image" />
+          </button>
+          <p>Click the cat to collect Cat Treats!</p>
+        </section>
+
+        <!-- Right Sidebar: Upgrades -->
+        <section class="sidebar" id="upgrades-menu">
+          <h2>Upgrades</h2>
+          <ul>
+            <li>
+              <button class="upgrade-btn" id="catnip-upgrade">
+                Catnip Stash (2x Street Cat) - 100 Treats
+              </button>
+            </li>
+            <li>
+              <button class="upgrade-btn" id="fish-stew-upgrade">
+                Grandma's Fish Stew (5x Grandma Cat) - 1000 Treats
+              </button>
+            </li>
+            <!-- Add more upgrades here -->
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer: Stats, Settings -->
+    <footer>
+      <div class="footer-content">
+        <button id="stats-btn">Stats</button>
+        <button id="settings-btn">Settings</button>
+      </div>
+
+      <!-- Stats Modal -->
+      <div id="stats-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="close-stats">&times;</span>
+          <h2>Game Statistics</h2>
+          <p>Total Treats Collected: <span id="total-treats">0</span></p>
+          <p>Treats in the Bank: <span id="current-treats">0</span></p>
+          <p>Treats Per Second: <span id="stats-tps">0</span></p>
+          <p>Game Time: <span id="game-time">0h 0m 0s</span></p>
+          <p>Cat Colony Size: <span id="colony-size">0</span></p>
+          <p>Cat Clicks: <span id="cat-clicks">0</span></p>
+          <!-- Add more statistics as needed -->
+        </div>
+      </div>
+
+      <!-- Settings Modal -->
+      <div id="settings-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="close-settings">&times;</span>
+          <h2>Game Settings</h2>
+          <button id="mute-btn">Mute</button>
+          <label for="volume-control">Volume:</label>
+          <input
+            type="range"
+            id="volume-control"
+            min="0"
+            max="1"
+            step="0.1"
+            value="0.5"
+          />
+
+          <button id="delete-save">Delete Save Data</button>
+        </div>
+      </div>
+    </footer>
+
+    <audio
+      id="bg-music"
+      src="assets/audio/background-music.mp3"
+      loop="loop"
+      type="audio/mp3"
+    ></audio>
+  </body>
+</html>
