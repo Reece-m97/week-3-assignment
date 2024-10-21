@@ -1,6 +1,7 @@
 // DOM Nodes
 // Clickable cat
 const catBtn = document.getElementById("cat-btn");
+const clickSound = document.getElementById("click-sound");
 
 // Header
 const treatsDisplay = document.getElementById("treats-display");
@@ -51,11 +52,11 @@ let nekoCost = parseInt(localStorage.getItem("nekoCost")) || 5000;
 treatsDisplay.textContent = treats;
 tpsDisplay.textContent = tps;
 totalTreatsDisplay.textContent = totalTreatsCollected;
-streetBtn.textContent = `Street Cat - ${streetCost} Treats`;
-grandmaBtn.textContent = `Grandma Cat - ${grandmaCost} Treats`;
-fisherBtn.textContent = `Fisher Cat - ${fisherCost} Treats`;
-hunterBtn.textContent = `Hunter Cat - ${hunterCost} Treats`;
-nekoBtn.textContent = `Neko Chef - ${nekoCost} Treats`;
+streetBtn.textContent = `Street Cat (Gains 1 treat per second) - ${streetCost} Treats`;
+grandmaBtn.textContent = `Grandma Cat (Gains 5 treat per second) - ${grandmaCost} Treats`;
+fisherBtn.textContent = `Fisher Cat (Gains 10 treat per second) - ${fisherCost} Treats`;
+hunterBtn.textContent = `Hunter Cat (Gains 20 treat per second) - ${hunterCost} Treats`;
+nekoBtn.textContent = `Neko Chef (Gains 50 treat per second) - ${nekoCost} Treats`;
 
 // Tracking game time
 if (!localStorage.getItem("gameStartTime")) {
@@ -80,6 +81,15 @@ catBtn.addEventListener("click", function () {
   localStorage.setItem("treats", treats);
   localStorage.setItem("totalTreatsCollected", totalTreatsCollected);
   localStorage.setItem("catClicks", catClicks);
+
+  catBtn.classList.add("enlarge");
+
+  setTimeout(function () {
+    catBtn.classList.remove("enlarge");
+  }, 200);
+
+  clickSound.currentTime = 0;
+  clickSound.play();
 });
 
 // Buy Street Cat
@@ -146,11 +156,11 @@ nekoBtn.addEventListener("click", function () {
 function updateDisplay() {
   treatsDisplay.textContent = treats;
   tpsDisplay.textContent = tps;
-  streetBtn.textContent = `Street Cat - ${streetCost} Treats`;
-  grandmaBtn.textContent = `Grandma Cat - ${grandmaCost} Treats`;
-  fisherBtn.textContent = `Fisher Cat - ${fisherCost} Treats`;
-  hunterBtn.textContent = `Hunter Cat - ${hunterCost} Treats`;
-  nekoBtn.textContent = `Neko Chef - ${nekoCost} Treats`;
+  streetBtn.textContent = `Street Cat (Gains 1 treat per second)  - ${streetCost} Treats`;
+  grandmaBtn.textContent = `Grandma Cat (Gains 5 treat per second) - ${grandmaCost} Treats`;
+  fisherBtn.textContent = `Fisher Cat (Gains 10 treat per second) - ${fisherCost} Treats`;
+  hunterBtn.textContent = `Hunter Cat (Gains 20 treat per second) - ${hunterCost} Treats`;
+  nekoBtn.textContent = `Neko Chef (Gains 50 treat per second) - ${nekoCost} Treats`;
 }
 
 // Function to save variables to localStorage
@@ -230,6 +240,12 @@ window.addEventListener("click", function (event) {
 // Select the audio element
 const bgMusic = document.getElementById("bg-music");
 
+// Start the music when the game starts
+function startGame() {
+  bgMusic.play();
+  gameStartTime = Date.now();
+}
+
 // Mute button functionality
 const muteBtn = document.getElementById("mute-btn");
 let isMuted = true; // Start as muted
@@ -239,9 +255,7 @@ muteBtn.textContent = "Unmute"; // Initial button text
 muteBtn.addEventListener("click", function () {
   if (isMuted) {
     bgMusic.muted = false; // Unmute
-    bgMusic.play().catch((error) => {
-      console.log("Playback failed. User interaction might be needed.");
-    });
+    bgMusic.play(); // Start playing audio
     muteBtn.textContent = "Mute"; // Change button text
   } else {
     bgMusic.muted = true; // Mute
@@ -266,9 +280,7 @@ volumeControl.addEventListener("input", function () {
 window.addEventListener("load", function () {
   bgMusic.muted = true; // Start muted to allow autoplay
   bgMusic.play().catch((error) => {
-    console.log(
-      "Autoplay prevented. User interaction might be needed to play audio."
-    );
+    console.log("Autoplay prevented. User interaction needed to play audio.");
   });
 });
 

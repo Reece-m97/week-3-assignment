@@ -79,6 +79,10 @@ main .game-container {
   width: 100%;
 }
 
+.recruit-btn {
+  font-size: 14.5px;
+}
+
 .recruit-btn:hover,
 .upgrade-btn:hover {
   background-color: #ff5722;
@@ -96,17 +100,22 @@ main .game-container {
 #cat-btn {
   width: 200px;
   height: 200px;
-  border-radius: 50%;
-  background-color: #ffe0b2;
+  border-radius: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   margin-bottom: 20px;
+  transition: transform 0.2s ease;
+}
+
+#cat-btn.enlarge {
+  transform: scale(1.15);
 }
 
 #cat-image {
-  width: 90%;
+  width: 100%;
+  border-radius: 25%;
   height: auto;
 }
 
@@ -179,6 +188,7 @@ footer .footer-content button:hover {
   .game-container {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 50px;
   }
 
   .sidebar,
